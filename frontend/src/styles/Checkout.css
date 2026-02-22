@@ -1,0 +1,150 @@
+/* Checkout Styles */
+.checkout {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  flex: 1;
+}
+
+.checkout h1 {
+  text-align: center;
+  font-size: 32px;
+  color: #333;
+  margin-bottom: 40px;
+}
+
+.checkout-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+.checkout-summary {
+  background: white;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  height: fit-content;
+}
+
+.checkout-summary h2 {
+  font-size: 20px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.order-item {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 25px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.order-item img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.item-title {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.item-location {
+  font-size: 13px;
+  color: #666;
+}
+
+.order-total {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 2px solid #eee;
+}
+
+.total-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  color: #666;
+  font-size: 14px;
+}
+
+.total-row.final {
+  font-size: 16px;
+  font-weight: 700;
+  color: #333;
+  padding-top: 10px;
+  border-top: 1px solid #eee;
+}
+
+.checkout-form {
+  background: white;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  height: fit-content;
+}
+
+.checkout-form h2 {
+  font-size: 20px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.payment-info {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.checkout-button {
+  width: 100%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 10px;
+  transition: all 0.3s ease;
+}
+
+.checkout-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.cancel-button {
+  width: 100%;
+  background-color: white;
+  color: #666;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cancel-button:hover {
+  background-color: #f9f9f9;
+  border-color: #999;
+}
+
+@media (max-width: 768px) {
+  .checkout-container {
+    grid-template-columns: 1fr;
+  }
+
+  .checkout h1 {
+    font-size: 24px;
+  }
+}
