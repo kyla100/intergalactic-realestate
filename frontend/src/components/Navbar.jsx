@@ -18,7 +18,7 @@ function Navbar() {
     <nav className="navbar">
       <div className="navbar-container">
         <Link to="/" className="navbar-logo">
-          🌌 Intergalactic Real Estate
+          Intergalactic Real Estate
         </Link>
 
         <div className="navbar-menu">

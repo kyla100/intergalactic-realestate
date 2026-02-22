@@ -28,7 +28,7 @@ function Home() {
         </div>
         <div className="hero-overlay" />
         <div className="hero-content">
-          <h1>🌌 Explore Infinite Real Estate Possibilities</h1>
+          <h1>Explore Infinite Real Estate Possibilities</h1>
           <p>Buy and sell property across the Milky Way, Andromeda, and beyond</p>
           <Link to="/listings" className="cta-button">
             Start Exploring
