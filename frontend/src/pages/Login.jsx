@@ -26,7 +26,11 @@ function Login() {
       dispatch(setUser(user));
       navigate('/');
     } catch (err) {
-      const message = err.response?.data?.message || 'Login failed';
+      const message =
+        err.response?.data?.message ||
+        (err.code === 'ERR_NETWORK'
+          ? 'Cannot reach server. Start backend and MongoDB, then try again.'
+          : 'Login failed');
       setErrorState(message);
       dispatch(setError(message));
     } finally {

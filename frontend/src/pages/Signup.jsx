@@ -36,7 +36,11 @@ function Signup() {
       dispatch(setUser(user));
       navigate('/');
     } catch (err) {
-      const message = err.response?.data?.message || 'Signup failed';
+      const message =
+        err.response?.data?.message ||
+        (err.code === 'ERR_NETWORK'
+          ? 'Cannot reach server. Start backend and MongoDB, then try again.'
+          : 'Signup failed');
       setErrorState(message);
       dispatch(setError(message));
     } finally {

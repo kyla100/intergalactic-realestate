@@ -39,24 +39,25 @@ function Home() {
       <section className="features">
         <h2>Why Choose Intergalactic Real Estate?</h2>
         <div className="features-grid">
-          <Link to="/galaxies" className="feature-card">
+          <Link to="/galaxies" className="feature-card glow-option">
             <span className="feature-icon">🌍</span>
             <h3>Galaxies Across the Universe</h3>
             <p>Access properties in the Milky Way, Andromeda, and other known galaxies</p>
             <span className="feature-arrow">→</span>
           </Link>
-          <Link to="/premium-properties" className="feature-card">
+          <Link to="/premium-properties" className="feature-card glow-option">
             <span className="feature-icon">💎</span>
             <h3>Premium Properties</h3>
             <p>High-quality listings with detailed features and stunning imagery</p>
             <span className="feature-arrow">→</span>
           </Link>
-          <div className="feature-card">
+          <Link to="/secure-payments" className="feature-card glow-option">
             <span className="feature-icon">💰</span>
             <h3>Secure Payments</h3>
             <p>Safe transactions with Stripe integration and escrow services</p>
-          </div>
-          <Link to="/trusted-community" className="feature-card">
+            <span className="feature-arrow">→</span>
+          </Link>
+          <Link to="/trusted-community" className="feature-card glow-option">
             <span className="feature-icon">👥</span>
             <h3>Trusted Community</h3>
             <p>Connect with verified buyers and sellers across the galaxy</p>

@@ -60,6 +60,7 @@
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
+  text-align: center;
   color: #f2f5ff;
   text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
 }
@@ -75,7 +76,8 @@
   text-align: center;
   font-size: 36px;
   margin-bottom: 40px;
-  color: #333;
+  color: #667eea;
+  font-weight: 700;
 }
 
 .features-grid {
@@ -105,6 +107,15 @@
 
 .feature-card.feature-card:hover {
   background: linear-gradient(135deg, rgba(102, 126, 234, 0.08), rgba(118, 75, 162, 0.08));
+}
+
+.glow-option:hover,
+.glow-option:focus-visible,
+.glow-option:active {
+  box-shadow:
+    0 0 0 2px rgba(102, 126, 234, 0.32),
+    0 0 26px rgba(102, 126, 234, 0.45),
+    0 0 52px rgba(118, 75, 162, 0.28);
 }
 
 .feature-arrow {
@@ -155,7 +166,8 @@
 .cta-section h2 {
   font-size: 32px;
   margin-bottom: 30px;
-  color: #333;
+  color: #667eea;
+  font-weight: 700;
 }
 
 @media (max-width: 768px) {

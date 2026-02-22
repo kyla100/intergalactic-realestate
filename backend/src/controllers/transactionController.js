@@ -3,11 +3,31 @@ import Property from '../models/Property.js';
 import User from '../models/User.js';
 import Stripe from 'stripe';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+let stripeClient = null;
+
+const getStripeClient = () => {
+  if (stripeClient) return stripeClient;
+  if (!process.env.STRIPE_SECRET_KEY) return null;
+
+  try {
+    stripeClient = new Stripe(process.env.STRIPE_SECRET_KEY);
+    return stripeClient;
+  } catch (error) {
+    console.error('Stripe initialization failed:', error.message);
+    return null;
+  }
+};
 
 // Create checkout session
 export const createCheckoutSession = async (req, res) => {
   try {
+    const stripe = getStripeClient();
+    if (!stripe) {
+      return res.status(503).json({
+        message: 'Payments are temporarily unavailable. Stripe is not configured.',
+      });
+    }
+
     const { propertyId } = req.body;
 
     const property = await Property.findById(propertyId).populate('seller');
@@ -54,6 +74,13 @@ export const handlePaymentWebhook = async (req, res) => {
   const sig = req.headers['stripe-signature'];
 
   try {
+    const stripe = getStripeClient();
+    if (!stripe) {
+      return res.status(503).json({
+        message: 'Payments are temporarily unavailable. Stripe is not configured.',
+      });
+    }
+
     const event = stripe.webhooks.constructEvent(
       req.body,
       sig,
