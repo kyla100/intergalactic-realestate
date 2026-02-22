@@ -2,10 +2,31 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/Home.css';
 
+const heroSlides = [
+  '/hero/1_landscape.png',
+  '/hero/2_landscape.png',
+  '/hero/3_landscape.png',
+  '/hero/4_landscape.png',
+  '/hero/5_landscape.png',
+];
+
 function Home() {
   return (
     <div className="home">
       <section className="hero">
+        <div className="hero-slideshow" aria-hidden="true">
+          {heroSlides.map((slide, index) => (
+            <div
+              key={slide}
+              className="hero-slide"
+              style={{
+                backgroundImage: `url(${slide})`,
+                animationDelay: `${index * 8}s`,
+              }}
+            />
+          ))}
+        </div>
+        <div className="hero-overlay" />
         <div className="hero-content">
           <h1>🌌 Explore Infinite Real Estate Possibilities</h1>
           <p>Buy and sell property across the Milky Way, Andromeda, and beyond</p>
@@ -35,11 +56,12 @@ function Home() {
             <h3>Secure Payments</h3>
             <p>Safe transactions with Stripe integration and escrow services</p>
           </div>
-          <div className="feature-card">
+          <Link to="/trusted-community" className="feature-card">
             <span className="feature-icon">👥</span>
             <h3>Trusted Community</h3>
             <p>Connect with verified buyers and sellers across the galaxy</p>
-          </div>
+            <span className="feature-arrow">→</span>
+          </Link>
         </div>
       </section>
 

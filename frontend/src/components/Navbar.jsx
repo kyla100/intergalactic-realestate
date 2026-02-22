@@ -25,6 +25,9 @@ function Navbar() {
           <Link to="/listings" className="nav-link">
             Browse Listings
           </Link>
+          <Link to="/trusted-community" className="nav-link">
+            Trusted Community
+          </Link>
 
           {isAuthenticated ? (
             <>

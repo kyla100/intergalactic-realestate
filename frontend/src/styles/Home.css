@@ -4,31 +4,64 @@
 }
 
 .hero {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
-  padding: 100px 20px;
+  min-height: 560px;
+  padding: 120px 20px;
   text-align: center;
   margin-bottom: 60px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-slideshow {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transform: scale(1.03);
+  animation: heroFade 40s infinite;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(12, 16, 40, 0.35), rgba(10, 13, 30, 0.68));
+}
+
+.hero-content {
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 12px;
 }
 
 .hero-content h1 {
-  font-size: 48px;
+  font-size: 54px;
   margin-bottom: 16px;
   font-weight: 700;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.55);
 }
 
 .hero-content p {
   font-size: 20px;
   margin-bottom: 30px;
-  opacity: 0.95;
+  opacity: 1;
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
-}
-
-/* ensure hero content text is centered */
-.hero-content {
-  text-align: center;
+  color: #f2f5ff;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
 }
 
 .features {
@@ -110,12 +143,6 @@
   line-height: 1.6;
 }
 
-/* hero paragraph should be light-pink on dark background */
-.hero-content p {
-  color: var(--muted-color);
-  text-align: center;
-}
-
 .cta-section {
   text-align: center;
   padding: 60px 20px;
@@ -132,6 +159,11 @@
 }
 
 @media (max-width: 768px) {
+  .hero {
+    min-height: 420px;
+    padding: 92px 20px;
+  }
+
   .hero-content h1 {
     font-size: 32px;
   }
@@ -146,5 +178,28 @@
 
   .cta-section h2 {
     font-size: 24px;
+  }
+}
+
+@keyframes heroFade {
+  0% {
+    opacity: 0;
+    transform: scale(1.03);
+  }
+  7% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+  20% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+  27% {
+    opacity: 0;
+    transform: scale(1.11);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.11);
   }
 }

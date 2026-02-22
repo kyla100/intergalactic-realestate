@@ -15,6 +15,7 @@ import Checkout from './pages/Checkout';
 import SellerDashboard from './pages/SellerDashboard';
 import GalaxiesExplorer from './pages/GalaxiesExplorer';
 import PremiumProperties from './pages/PremiumProperties';
+import TrustedCommunity from './pages/TrustedCommunity';
 
 // Components
 import Navbar from './components/Navbar';
@@ -53,6 +54,7 @@ function App() {
         <Route path="/listings" element={<BrowseListings />} />
         <Route path="/galaxies" element={<GalaxiesExplorer />} />
         <Route path="/premium-properties" element={<PremiumProperties />} />
+        <Route path="/trusted-community" element={<TrustedCommunity />} />
         <Route path="/property/:id" element={<PropertyDetail />} />
         <Route path="/profile/:id" element={<UserProfile />} />
         <Route path="/login" element={isAuthenticated ? <Navigate to="/" /> : <Login />} />
