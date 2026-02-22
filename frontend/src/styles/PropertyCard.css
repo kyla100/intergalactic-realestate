@@ -29,6 +29,16 @@
   transition: transform 0.3s ease;
 }
 
+.emoji-image {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+  background: #f0f0f0;
+}
+
 .property-card:hover .property-image {
   transform: scale(1.1);
 }
@@ -63,13 +73,13 @@
 
 .property-location {
   font-size: 14px;
-  color: #666;
+  color: var(--muted-color);
   margin-bottom: 10px;
 }
 
 .property-description {
   font-size: 13px;
-  color: #777;
+  color: var(--muted-color);
   margin-bottom: 12px;
   flex: 1;
   line-height: 1.4;
@@ -91,7 +101,7 @@
 
 .property-rating {
   font-size: 14px;
-  color: #666;
+  color: var(--muted-color);
 }
 
 @media (max-width: 480px) {

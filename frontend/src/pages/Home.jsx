@@ -18,16 +18,18 @@ function Home() {
       <section className="features">
         <h2>Why Choose Intergalactic Real Estate?</h2>
         <div className="features-grid">
-          <div className="feature-card">
+          <Link to="/galaxies" className="feature-card">
             <span className="feature-icon">🌍</span>
             <h3>Galaxies Across the Universe</h3>
             <p>Access properties in the Milky Way, Andromeda, and other known galaxies</p>
-          </div>
-          <div className="feature-card">
+            <span className="feature-arrow">→</span>
+          </Link>
+          <Link to="/premium-properties" className="feature-card">
             <span className="feature-icon">💎</span>
             <h3>Premium Properties</h3>
             <p>High-quality listings with detailed features and stunning imagery</p>
-          </div>
+            <span className="feature-arrow">→</span>
+          </Link>
           <div className="feature-card">
             <span className="feature-icon">💰</span>
             <h3>Secure Payments</h3>

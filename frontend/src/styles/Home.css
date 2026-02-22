@@ -26,6 +26,11 @@
   margin-right: auto;
 }
 
+/* ensure hero content text is centered */
+.hero-content {
+  text-align: center;
+}
+
 .features {
   max-width: 1200px;
   margin: 0 auto;
@@ -53,6 +58,34 @@
   text-align: center;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.feature-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.feature-card.feature-card:hover {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.08), rgba(118, 75, 162, 0.08));
+}
+
+.feature-arrow {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 24px;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.feature-card:hover .feature-arrow {
+  opacity: 1;
+  transform: translateX(5px);
 }
 
 .feature-card:hover {
@@ -73,8 +106,14 @@
 }
 
 .feature-card p {
-  color: #666;
+  color: #666; /* keep text dark on white feature cards */
   line-height: 1.6;
+}
+
+/* hero paragraph should be light-pink on dark background */
+.hero-content p {
+  color: var(--muted-color);
+  text-align: center;
 }
 
 .cta-section {

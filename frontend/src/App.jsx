@@ -13,6 +13,8 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Checkout from './pages/Checkout';
 import SellerDashboard from './pages/SellerDashboard';
+import GalaxiesExplorer from './pages/GalaxiesExplorer';
+import PremiumProperties from './pages/PremiumProperties';
 
 // Components
 import Navbar from './components/Navbar';
@@ -49,6 +51,8 @@ function App() {
         {/* Public routes */}
         <Route path="/" element={<Home />} />
         <Route path="/listings" element={<BrowseListings />} />
+        <Route path="/galaxies" element={<GalaxiesExplorer />} />
+        <Route path="/premium-properties" element={<PremiumProperties />} />
         <Route path="/property/:id" element={<PropertyDetail />} />
         <Route path="/profile/:id" element={<UserProfile />} />
         <Route path="/login" element={isAuthenticated ? <Navigate to="/" /> : <Login />} />

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { propertyAPI } from '../services/api';
+import { getAllProperties } from '../data/propertyData';
 import '../styles/PropertyDetail.css';
 
 function PropertyDetail() {
@@ -12,10 +13,56 @@ function PropertyDetail() {
   useEffect(() => {
     const fetchProperty = async () => {
       try {
+        // Try to fetch from API first
         const response = await propertyAPI.getProperty(id);
         setProperty(response.data);
       } catch (err) {
-        setError(err.response?.data?.message || 'Failed to load property');
+        // If API fails, try to find in mock data
+        try {
+          const mockProperties = getAllProperties();
+          const mockProperty = mockProperties.find(p => p.id === parseInt(id));
+          
+          if (mockProperty) {
+            // Format mock data to match the expected structure
+            const formattedProperty = {
+              _id: mockProperty.id,
+              title: mockProperty.name,
+              description: mockProperty.description,
+              price: mockProperty.price,
+              planet: mockProperty.planetName,
+              galaxy: mockProperty.galaxyName,
+              location: mockProperty.planetName,
+              area: {
+                value: mockProperty.area,
+                unit: 'sq ft'
+              },
+              status: 'Available',
+              rating: 4.5 + (Math.random() * 0.5),
+              totalReviews: Math.floor(Math.random() * 50) + 10,
+              mainImage: 'https://via.placeholder.com/600x400?text=Property',
+              features: mockProperty.features.map((feature, idx) => ({
+                name: feature,
+                description: `Premium feature included in this property`
+              })),
+              currency: 'USD',
+              seller: {
+                firstName: 'Intergalactic',
+                lastName: 'Realty',
+                rating: 4.8
+              },
+              views: Math.floor(Math.random() * 1000) + 100,
+              favorites: Math.floor(Math.random() * 200) + 20,
+              bedrooms: mockProperty.bedrooms,
+              bathrooms: mockProperty.bathrooms,
+              isPremium: mockProperty.isPremium
+            };
+            setProperty(formattedProperty);
+          } else {
+            setError('Property not found');
+          }
+        } catch (mockError) {
+          setError(err.response?.data?.message || 'Failed to load property');
+        }
       } finally {
         setLoading(false);
       }
@@ -23,6 +70,13 @@ function PropertyDetail() {
 
     fetchProperty();
   }, [id]);
+
+  useEffect(() => {
+    if (process.env.NODE_ENV !== 'production' && property) {
+      // eslint-disable-next-line no-console
+      console.debug('[PropertyDetail] loaded property id:', property._id || property.id, 'mainImage:', property.mainImage, 'image:', property.image);
+    }
+  }, [property]);
 
   if (loading) return <div className="loading">Loading property details...</div>;
   if (error) return <div className="error">{error}</div>;
@@ -35,15 +89,24 @@ function PropertyDetail() {
         <p className="detail-location">
           📍 {property.location}, {property.planet} - {property.galaxy}
         </p>
+        {property.isPremium && <span className="premium-label">⭐ Premium Property</span>}
       </div>
 
       <div className="detail-container">
         <div className="detail-main">
           <div className="detail-image">
-            <img
-              src={property.mainImage || 'https://via.placeholder.com/600x400'}
-              alt={property.title}
-            />
+            {(() => {
+              const img = property.mainImage || property.image || '';
+              const isUrl = typeof img === 'string' && /^(https?:\/\/|data:image\/|\/)/i.test(img);
+              if (isUrl) {
+                return <img src={img} alt={property.title} />;
+              }
+              // render emoji or placeholder div when image is not a URL
+              if (typeof img === 'string' && img.length < 4) {
+                return <div className="emoji-image" style={{fontSize: '5rem'}}>{img}</div>;
+              }
+              return <img src={'https://via.placeholder.com/600x400?text=Property'} alt={property.title} />;
+            })()}
           </div>
 
           <div className="detail-info">
@@ -52,13 +115,47 @@ function PropertyDetail() {
               <p>{property.description}</p>
             </div>
 
+            <div className="detail-section">
+              <h2>Property Specifications</h2>
+              <div className="specs-grid">
+                <div className="spec-item">
+                  <span className="spec-icon">🛏️</span>
+                  <div>
+                    <p className="spec-label">Bedrooms</p>
+                    <p className="spec-value">{property.bedrooms}</p>
+                  </div>
+                </div>
+                <div className="spec-item">
+                  <span className="spec-icon">🚿</span>
+                  <div>
+                    <p className="spec-label">Bathrooms</p>
+                    <p className="spec-value">{property.bathrooms}</p>
+                  </div>
+                </div>
+                <div className="spec-item">
+                  <span className="spec-icon">📏</span>
+                  <div>
+                    <p className="spec-label">Area</p>
+                    <p className="spec-value">{property.area?.value?.toLocaleString()} {property.area?.unit}</p>
+                  </div>
+                </div>
+                <div className="spec-item">
+                  <span className="spec-icon">🌍</span>
+                  <div>
+                    <p className="spec-label">Status</p>
+                    <p className="spec-value">{property.status}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             {property.features && property.features.length > 0 && (
               <div className="detail-section">
-                <h2>Features</h2>
+                <h2>Features & Amenities</h2>
                 <ul className="features-list">
                   {property.features.map((feature, index) => (
                     <li key={index}>
-                      <strong>{feature.name}</strong>: {feature.description}
+                      ✓ <strong>{typeof feature === 'string' ? feature : feature.name}</strong>
                     </li>
                   ))}
                 </ul>
@@ -68,12 +165,6 @@ function PropertyDetail() {
             <div className="detail-section">
               <h2>Property Details</h2>
               <div className="details-grid">
-                <div>
-                  <strong>Area:</strong> {property.area?.value} {property.area?.unit}
-                </div>
-                <div>
-                  <strong>Status:</strong> {property.status}
-                </div>
                 <div>
                   <strong>Rating:</strong> ⭐ {property.rating.toFixed(1)}/5
                 </div>
@@ -87,14 +178,14 @@ function PropertyDetail() {
 
         <div className="detail-sidebar">
           <div className="price-box">
-            <p className="price-label">Price</p>
+            <p className="price-label">Investment Price</p>
             <p className="price-amount">${property.price.toLocaleString()}</p>
             <p className="price-currency">{property.currency}</p>
           </div>
 
-          <button className="buy-button">
-            <a href={`/checkout/${property._id}`}>Buy Now</a>
-          </button>
+          <a href={`/checkout/${property._id}`} className="buy-button">
+            Purchase Property
+          </a>
 
           <div className="seller-info">
             <h3>Seller Information</h3>
@@ -113,6 +204,11 @@ function PropertyDetail() {
           <div className="property-stats">
             <p>👁️ {property.views} views</p>
             <p>❤️ {property.favorites} favorites</p>
+          </div>
+
+          <div className="security-info">
+            <h3>🛡️ Secure Transaction</h3>
+            <p>All purchases are protected by escrow and Stripe payment security</p>
           </div>
         </div>
       </div>
