@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { propertyAPI } from '../services/api';
 import { getAllProperties } from '../data/propertyData';
+import { getPropertyImage, getUploadedHouseImage } from '../utils/propertyImages';
 import '../styles/PropertyDetail.css';
 
 function PropertyDetail() {
@@ -39,7 +40,8 @@ function PropertyDetail() {
               status: 'Available',
               rating: 4.5 + (Math.random() * 0.5),
               totalReviews: Math.floor(Math.random() * 50) + 10,
-              mainImage: 'https://via.placeholder.com/600x400?text=Property',
+              mainImage: null,
+              image: mockProperty.image,
               features: mockProperty.features.map((feature, idx) => ({
                 name: feature,
                 description: `Premium feature included in this property`
@@ -95,18 +97,16 @@ function PropertyDetail() {
       <div className="detail-container">
         <div className="detail-main">
           <div className="detail-image">
-            {(() => {
-              const img = property.mainImage || property.image || '';
-              const isUrl = typeof img === 'string' && /^(https?:\/\/|data:image\/|\/)/i.test(img);
-              if (isUrl) {
-                return <img src={img} alt={property.title} />;
-              }
-              // render emoji or placeholder div when image is not a URL
-              if (typeof img === 'string' && img.length < 4) {
-                return <div className="emoji-image" style={{fontSize: '5rem'}}>{img}</div>;
-              }
-              return <img src={'https://via.placeholder.com/600x400?text=Property'} alt={property.title} />;
-            })()}
+            <img
+              src={getPropertyImage(property)}
+              alt={property.title}
+              onError={(e) => {
+                const fallback = getUploadedHouseImage(property, 1);
+                if (e.currentTarget.src !== fallback) {
+                  e.currentTarget.src = fallback;
+                }
+              }}
+            />
           </div>
 
           <div className="detail-info">
@@ -178,7 +178,7 @@ function PropertyDetail() {
 
         <div className="detail-sidebar">
           <div className="price-box">
-            <p className="price-label">Investment Price</p>
+            <p className="detail-price-label">Investment Price</p>
             <p className="price-amount">${property.price.toLocaleString()}</p>
             <p className="price-currency">{property.currency}</p>
           </div>

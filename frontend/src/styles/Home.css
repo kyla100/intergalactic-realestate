@@ -38,6 +38,9 @@
 }
 
 .hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
   position: relative;
   z-index: 1;
@@ -50,6 +53,10 @@
   font-size: 54px;
   margin-bottom: 16px;
   font-weight: 700;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: none;
+  white-space: nowrap;
   text-shadow: 0 2px 14px rgba(0, 0, 0, 0.55);
 }
 
@@ -146,12 +153,24 @@
 .feature-card h3 {
   font-size: 20px;
   margin-bottom: 12px;
-  color: #333;
+  color: #9a1b7a;
 }
 
 .feature-card p {
-  color: #666; /* keep text dark on white feature cards */
+  color: #fc58cb;
   line-height: 1.6;
+}
+
+.feature-card:hover h3,
+.feature-card:focus-visible h3,
+.feature-card:active h3 {
+  color: #9a1b7a;
+}
+
+.feature-card:hover p,
+.feature-card:focus-visible p,
+.feature-card:active p {
+  color: #fc58cb;
 }
 
 .cta-section {

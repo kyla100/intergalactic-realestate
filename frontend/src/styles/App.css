@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
+
 /* Global Styles */
 * {
   margin: 0;
@@ -10,15 +12,17 @@ html {
 }
 
 :root {
-  --muted-color: #ffd0ea; /* light pink for grey text */
+  --text-primary: #1f2333;
+  --text-secondary: #4f72ff;
+  --muted-color: #fc58cb;
 }
 
 body {
-  font-family: 'Times New Roman', Times, serif;
+  font-family: 'Montserrat', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
-  color: #333;
+  color: var(--text-primary);
   min-height: 100vh;
 }
 
