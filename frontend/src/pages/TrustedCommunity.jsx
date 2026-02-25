@@ -1,6 +1,26 @@
 import React from 'react';
 import '../styles/TrustedCommunity.css';
 
+const availableCommunityAvatars = [
+  '/community-profiles/1_zyra_quell.png',
+  '/community-profiles/2_grunk_tallo.png',
+  '/community-profiles/3_veli_sorn.png',
+  '/community-profiles/4_krax_9.png',
+  '/community-profiles/5_mira_flux.png',
+  '/community-profiles/6_drogo_fen.png',
+  '/community-profiles/7_luma_vex.png',
+  '/community-profiles/8_torg_helm_.png',
+  '/community-profiles/9_iri_nova.png',
+  '/community-profiles/10_braxie_jolt.png',
+  '/community-profiles/11_sela_prism.png',
+  '/community-profiles/12_nok_pellar.png',
+  '/community-profiles/13_yuna_arc.png',
+  '/community-profiles/14_rex_null.png',
+  '/community-profiles/15_pip_comet.png',
+  '/community-profiles/16_orla_tide.png',
+  '/community-profiles/17_dax_ember.png',
+];
+
 const communityMembers = [
   {
     id: 1,
@@ -71,7 +91,7 @@ const communityMembers = [
     species: 'Jovian',
     role: 'Commercial Agent',
     rating: 4,
-    avatar: '/community-profiles/8_torg_helm.png',
+    avatar: '/community-profiles/8_torg_helm_.png',
     blurb: 'Specialist in trade hubs and docking districts with high freight turnover.',
   },
   {
@@ -191,6 +211,11 @@ const renderStars = (rating) =>
     </span>
   ));
 
+const getFallbackAvatar = (member) => {
+  const index = (member.id - 1) % availableCommunityAvatars.length;
+  return availableCommunityAvatars[index];
+};
+
 function TrustedCommunity() {
   return (
     <div className="trusted-community-page">
@@ -202,7 +227,17 @@ function TrustedCommunity() {
       <section className="portrait-gallery">
         {communityMembers.map((member) => (
           <article className="portrait-card" key={member.id}>
-            <img src={member.avatar} alt={`${member.name} profile`} className="portrait-image" />
+            <img
+              src={member.avatar}
+              alt={`${member.name} profile`}
+              className="portrait-image"
+              onError={(e) => {
+                const fallback = getFallbackAvatar(member);
+                if (e.currentTarget.src !== fallback) {
+                  e.currentTarget.src = fallback;
+                }
+              }}
+            />
             <div className="portrait-top">
               <h2>{member.name}</h2>
               <p className="member-meta">

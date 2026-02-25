@@ -6,7 +6,7 @@ function Footer() {
     <footer className="footer">
       <div className="footer-container">
         <div className="footer-section">
-          <h3>🌌 Intergalactic Real Estate</h3>
+          <h3>Intergalactic Real Estate</h3>
           <p>Explore the galaxy, find your perfect home</p>
         </div>
         <div className="footer-section">
