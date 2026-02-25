@@ -41,7 +41,7 @@ function Login() {
   return (
     <div className="auth-container">
       <div className="auth-box">
-        <h1>Welcome Back to 🌌</h1>
+        <h1>Welcome Back!</h1>
         <form onSubmit={handleSubmit}>
           {error && <div className="error-message">{error}</div>}
 

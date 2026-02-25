@@ -76,7 +76,7 @@ function BrowseListings() {
 
   return (
     <div className="browse-listings">
-      <h1>🏘️ Browse Planetary Properties</h1>
+      <h1 className="browse-title">Browse Planetary Properties</h1>
 
       <div className="filters">
         <select name="galaxy" value={filters.galaxy} onChange={handleFilterChange}>

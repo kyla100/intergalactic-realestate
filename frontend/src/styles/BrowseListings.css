@@ -6,11 +6,12 @@
   flex: 1;
 }
 
-.browse-listings h1 {
+.browse-title {
   text-align: center;
-  font-size: 36px;
+  font-size: 24px;
+  font-weight: 700;
   margin-bottom: 40px;
-  color: #333;
+  color: #667eea;
 }
 
 .filters {
@@ -62,8 +63,8 @@
 }
 
 @media (max-width: 768px) {
-  .browse-listings h1 {
-    font-size: 28px;
+  .browse-title {
+    font-size: 20px;
   }
 
   .filters {
