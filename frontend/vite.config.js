@@ -3,7 +3,6 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
   plugins: [react()],
-  base: '/intergalactic-realestate/',
   server: {
     port: 5173,
     proxy: {
